@@ -120,21 +120,21 @@ offerForm.addEventListener("submit", (e) => {
                                     <th class="table-light">${
                                       orderOfferts[1].name
                                     }</th>
-                                    <td>${orderOfferts[1].price}</td>
+                                    <td>${orderOfferts[1].price} €</td>
                                     <td>${
-                                      (pbl - orderOfferts[1].price) /
-                                      (pbl - orderOfferts[1].price)
+                                      (((pbl - orderOfferts[1].price) /
+                                      (pbl - orderOfferts[1].price))*100).toFixed(2)
                                     }</td>
                                     </tr>
                                     <tr>
                                     <th class="table-light">${
                                       orderOfferts[0].name
                                     }</th>
-                                    <td>${orderOfferts[0].price}</td>
-                                    <td>${(
-                                      (pbl - orderOfferts[0].price) /
-                                      (pbl - orderOfferts[1].price)
-                                    ).toFixed(2)}</td>
+                                    <td>${formatoMoneda(orderOfferts[0].price)}</td>
+                                    <td>${
+                                      (((pbl - orderOfferts[0].price) /
+                                      (pbl - orderOfferts[1].price))*100).toFixed(2)
+                                    }</td>
                                     </tr>
                                 </tbody>
                         </table>
@@ -159,7 +159,7 @@ offerForm.addEventListener("submit", (e) => {
         );
 
         for (let offer of offers) {
-          const isAB = offer.price <= nuevaMedia * 0.9;
+          let isAB = offer.price <= nuevaMedia * 0.9;
           resultHTML += `
         <li class="list-group-item">${offer.name} : ${offer.price.toFixed(
             2
@@ -187,7 +187,7 @@ offerForm.addEventListener("submit", (e) => {
                 </thead>
                 <tbody>`
         for (let offer of ordenOfertas){
-            const puntos= ((pbl - offer.price) / (pbl - ordenOfertas[ordenOfertas.length - 1].price)).toFixed(2)
+            const puntos= (((pbl - offer.price) / (pbl - ordenOfertas[ordenOfertas.length - 1].price))*100).toFixed(2) 
         resultHTML +=`
             <tr>
                 <th class="table-light">${offer.name}</th>
