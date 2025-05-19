@@ -152,9 +152,8 @@ offerForm.addEventListener("submit", (e) => {
         const nuevaMedia =
           ofertaNoSupera.reduce((suma, offer) => suma + offer.price, 0) /
           ofertaNoSupera.length;
-        let hayOfertaAB = validOffers.some(
-          (offer) => offer.price <= nuevaMedia * 0.9
-        );
+        const anormalBaja = nuevaMedia*0.90
+        ;
 
         for (let offer of offers) {
           let isAB = offer.price <= nuevaMedia * 0.9;
@@ -163,9 +162,7 @@ offerForm.addEventListener("submit", (e) => {
             2
           )} --> ${
             isAB
-              ? `<strong>En baja</strong> <p>El umbral de anormalidad es ${nuevaMedia.toFixed(
-                  2
-                )}</p>`
+              ? `<strong>En baja</strong> <p>El umbral de anormalidad es ${formatoMoneda(anormalBaja)}</p>`
               : "No baja"
           } </li>     
         `;
