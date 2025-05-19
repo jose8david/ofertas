@@ -74,7 +74,7 @@ offerForm.addEventListener("submit", (e) => {
 
   let resultHTML = "<h3>Resultados:</h3><ul class='list-group'>";
 
-  let todasMenores = offers.every((offer) => offer.price < pbl);
+  let todasMenores = offers.every((offer) => offer.price <= pbl);
   let mayoresPBL = offers.filter((offer) => offer.price > pbl);
 
   if (todasMenores) {
@@ -87,9 +87,7 @@ offerForm.addEventListener("submit", (e) => {
       } : ${offer.price.toFixed(2)} € → ${
         isAB ? "<strong>En baja</strong>" : "No baja"
       }</li> `;
-      resultHTML += `<p>Serán anormalmente bajas aquellas ofertas inferior al 25 % del PBL. El umbral es de ${umbral.toFixed(
-        2
-      )} €</p>`;
+      resultHTML += `<p>Serán anormalmente bajas aquellas ofertas inferior al 25 % del PBL. El umbral es de ${formatoMoneda(umbral)} €</p>`;
     } else if (num === 2) {
       const orderOfferts = offers.sort((a, b) => b.price - a.price);
       const umbral = orderOfferts[0].price * 0.8;
@@ -207,6 +205,7 @@ offerForm.addEventListener("submit", (e) => {
       }
     }
   } else {
+    excesivasDiv.innerHTML = "";
     mayoresPBL.forEach((offer) => {
       excesivasDiv.innerHTML += `<p>La oferta de la empresa ${offer.name} está por encima del PBL. Elimínala o corrígela en su caso</p>`;
     });
